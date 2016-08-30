@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="round-red" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartinventorytools.FXMLDocumentController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <Button id="glass-grey" layoutX="256.0" layoutY="273.0" mnemonicParsing="false" onAction="#goToLoginPage" prefHeight="31.0" prefWidth="90.0" stylesheets="@cssFX.css" text="Welcome!" textAlignment="JUSTIFY">
+          <!--prefHeight="30.0" prefWidth="113.0" --> 
+          <!--style="-fx-font: 15px &quot;Times New Roman&quot;, Times, serif; -fx-font-weight: bold; -fx-background-color: #6BBBD6;" text="Welcome!" textFill="WHITE"-->
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font></Button>
+      <ImageView depthTest="ENABLE" fitHeight="338.0" fitWidth="331.0" layoutX="143.0" layoutY="-72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Smart.jpeg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
