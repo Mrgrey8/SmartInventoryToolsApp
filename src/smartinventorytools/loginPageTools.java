@@ -14,7 +14,7 @@ public class loginPageTools {
 
     public static Stage stage1;
 
-    public loginPageTools() throws Exception {
+    public void loginPageTools() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/LoginPageFXML.fxml"));
 
         Scene scene1 = new Scene(root);

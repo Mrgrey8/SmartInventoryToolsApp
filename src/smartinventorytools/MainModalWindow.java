@@ -9,19 +9,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static smartinventorytools.mainPage.stage;
+import static smartinventorytools.MainModalWindow.stage;
 
 /**
  *
  * @author admin
  */
-public class mainPage {
+public class MainModalWindow {
 
     public static Stage stage;
 
-    public mainPage() throws Exception {
+    public MainModalWindow() throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/mainPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/MainModalWindow.fxml"));
 
         Scene scene = new Scene(root);
         stage = new Stage();

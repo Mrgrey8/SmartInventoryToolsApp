@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package smartinventorytools;
 
 import com.mysql.jdbc.Connection;
@@ -19,16 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-/**
- *
- * @author admin
- */
-public class AutorizationController implements Initializable {
+
+public class AdminController implements Initializable {
 
     private String loginAdmin;
     private String passwordAdmin;
 
-    public AutorizationController() {
+    public AdminController() {
     }
 
     public void setLoginAdmin(String loginAdmin) {
@@ -56,6 +49,7 @@ public class AutorizationController implements Initializable {
     @FXML
     private PasswordField txtpassword;
 
+    //Логинимся и проверяем авторизацию
     @FXML
     private void btnlogin(ActionEvent event) throws Exception {
 
@@ -82,7 +76,7 @@ public class AutorizationController implements Initializable {
 
             if (loginAdmin.equals(txtLogin.getText()) && passwordAdmin.equals(txtpassword.getText())) {
                 loginPageTools.stage1.close();
-                new mainPage();
+                new MainModalWindow();
             } else {
                 lblmessage.setText("Error!");
             }

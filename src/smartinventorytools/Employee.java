@@ -6,13 +6,13 @@ import javafx.beans.property.*;
 
 public class Employee {
     //Declare Employees Table Columns
-    private final IntegerProperty id;
-    private final StringProperty firstName;
-    private final StringProperty secondName;
-    private final StringProperty lastName;
-    private final StringProperty jobPosition;
-    private final StringProperty startDate;
-    private final StringProperty firedDate;
+    private final  SimpleIntegerProperty id;
+    private final  SimpleStringProperty firstName;
+    private final  SimpleStringProperty secondName;
+    private final  SimpleStringProperty lastName;
+    private final  SimpleStringProperty jobPosition;
+    private final  SimpleStringProperty startDate;
+    private final  SimpleStringProperty firedDate;
   
  
     //Constructor

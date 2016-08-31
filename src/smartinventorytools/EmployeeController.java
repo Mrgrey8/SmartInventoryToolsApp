@@ -5,6 +5,7 @@
  */
 package smartinventorytools;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,21 +21,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-
-/**
- *
- * @author admin
- */
 public class EmployeeController implements Initializable {
     
     int useId;
     public static Stage stageEdit;
     public static Stage stageAdd;
+    public static Stage stageEditEmployee;
+   
+   Employee selectedEmployee;
 
     @FXML
     private TableView<Employee> tableEmployee;
@@ -62,7 +65,6 @@ public class EmployeeController implements Initializable {
 
     private ObservableList<Employee> data;
     
-    private ObservableList<Employee> dataEditView;
     
 
     @Override
@@ -74,6 +76,8 @@ public class EmployeeController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+     
     }
 
     //Открывает окно добавления сотрудника.
@@ -87,7 +91,6 @@ public class EmployeeController implements Initializable {
         stageAdd.setTitle("Новый сотрудник");
         stageAdd.show();
         
-
     }
 
     //Обновляет таблицу
@@ -133,24 +136,6 @@ public class EmployeeController implements Initializable {
           
     }
     
-    @FXML
-    private void btnEdit(ActionEvent action) throws Exception{
-        useId = tableEmployee.getSelectionModel().getSelectedItem().getId();
-          
-          int selectedIndex = tableEmployee.getSelectionModel().getSelectedIndex();
-          
-         System.out.println(tableEmployee.getItems().get(selectedIndex));
-      
-     Parent root = FXMLLoader.load(getClass().getResource("view/editEmployee.fxml"));
-
-        Scene scene = new Scene(root);
-        stageEdit = new Stage();
-        stageEdit.setScene(scene);
-        stageEdit.setTitle("Редактируйте сотрудника");
-        stageEdit.show();
-        
-        
-    }
 
     //Выводит таблицу на экран
     public void tableViewMethod() throws Exception {
@@ -213,9 +198,6 @@ public class EmployeeController implements Initializable {
             System.out.println("select: " + newValue.toString());
             });
             
-            
-            
-
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -225,8 +207,46 @@ public class EmployeeController implements Initializable {
         
     }
     
-    
-    
-    
+  
+
+    /**
+     * вызывается, когда пользователь кликает по кнопке Редактировать открывает
+     * диалоговое окно для изменения выбраного сотрудника
+     */
+    @FXML
+    public void btnEdit() throws IOException {
+
+        selectedEmployee = tableEmployee.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee != null) {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(EmployeeController.class.getResource("view/EmployeeEditDialogWindow.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+        stageEditEmployee = new Stage();
+
+        stageEditEmployee.setTitle("Edit Person");
+        stageEditEmployee.setResizable(false);
+        stageEditEmployee.initModality(Modality.WINDOW_MODAL);
+
+        Scene scene = new Scene(page);
+        stageEditEmployee.setScene(scene);
+
+//        передаем адресата в контроллер
+        EmployeeEditDialogSeter controller = loader.getController();
+        controller.setDialogStage(stageEditEmployee);
+        controller.setEmployee(selectedEmployee);
+
+        stageEditEmployee.show();
+
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Employee Selected !!!");
+            alert.setContentText("Please select a employee from the table and try again ");
+            alert.showAndWait();
+        }
+
+    }
 
 }
