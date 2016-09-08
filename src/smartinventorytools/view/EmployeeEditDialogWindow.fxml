@@ -32,8 +32,8 @@
             <TextField fx:id="secondNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="jobPositionField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-           <TextField fx:id="startDateField" GridPane.columnIndex="1" GridPane.rowIndex="4" /> 
-            <TextField fx:id="firedDateField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+           <DatePicker fx:id="startDateField" GridPane.columnIndex="1" GridPane.rowIndex="4" /> 
+            <DatePicker fx:id="firedDateField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button defaultButton="true" layoutX="175.0" layoutY="291.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" onAction="#updateDataButton" text="Ок" />

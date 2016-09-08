@@ -10,12 +10,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 
 
@@ -34,9 +38,9 @@ public class EmployeeEditDialogSeter implements Initializable{
     @FXML
     private TextField jobPositionField;
     @FXML
-    private TextField startDateField;
+    private DatePicker startDateField;
     @FXML
-    private TextField firedDateField;
+    private DatePicker firedDateField;
     
  
 
@@ -59,8 +63,8 @@ public class EmployeeEditDialogSeter implements Initializable{
          secondNameField.setText(employee.getSecondName());
          lastNameField.setText(employee.getLastName());
           jobPositionField.setText(employee.getJobPosition());
-          startDateField.setText(employee.getStartDate());
-          firedDateField.setText(employee.getFiredDate());
+          startDateField.getEditor().setText(employee.getStartDate());
+          firedDateField.getEditor().setText(employee.getFiredDate());
   
     }
     
@@ -68,7 +72,58 @@ public class EmployeeEditDialogSeter implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-         
+          String pattern = "yyyy-MM-dd";
+
+        startDateField.setPromptText(pattern.toLowerCase());
+
+        startDateField.setConverter(new StringConverter<LocalDate>() {
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+
+        });
+
+        firedDateField.setPromptText(pattern.toLowerCase());
+
+        firedDateField.setConverter(new StringConverter<LocalDate>() {
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+
+        });
+
     }
     
     @FXML
@@ -95,8 +150,8 @@ public class EmployeeEditDialogSeter implements Initializable{
                 "secondNAME = '"+ secondNameField.getText() +"'," +
                 "lastNAME = '"+ lastNameField.getText() +"'," +
                 "jobPosition = '" + jobPositionField.getText() + "'," +
-                "startDate = '"+ startDateField.getText() +"'," +
-                "firedDate = '"+ firedDateField.getText() +"'" +
+                "startDate = '"+ startDateField.getEditor().getText() +"'," +
+                "firedDate = '"+ firedDateField.getEditor().getText() +"'" +
                 "WHERE user_id = " + getEmployee().getId()+ ";";
  
              statement.executeUpdate(updateEmployee);
